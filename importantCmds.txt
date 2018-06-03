@@ -1,0 +1,138 @@
+Desktop\Web Design\Courses\Complete_React_Course\Section2\ExpensifyApp
+// Type $r in console to view the global variable it is present for all components 
+  if you are in the react developer tool console and click on a react componenet
+  then switch to the console & type $r, you can view each components global variable that way to see all props & state.
+
+// Babel yarn project react setup
+//command to launch live server once in the directory that will lead to the folder with index.html file lunch this command
+live-server folderNameWithHTMLfile
+
+//Install babel cli globably
+npm install -g babel-cli@6.24.1
+
+//include babel in project by launching this command in project folder 
+yarn init
+
+//(delete node_moduels folder & reinstall it)Install dependice presets into project folder http://babeljs.io/docs/plugins/preset-env/ for presets
+yarn add babel-preset-react@6.24.1 babel-preset-env@1.5.2
+
+// Take jsx code and compile it to react
+babel src/app.js --out-file=public/scripts/app.js --presets=env,react 
+
+// Added with the watch flag will watch for changes in the src folder and add automatically to the scripts folder
+babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+
+// If a react project is downloaded the node_modules folder will not come with it. To get that folder back launch
+yarn install
+// Then launch the babel command and the depencies will load into the node_modules folder
+
+-----------------------------------------------------------------------------
+Quest to replace depencies: replace global moduels with local moduels 
+1. npm uninstall -g babel-cli live-server (for yarn its yarn)
+2. yarn add live-server babel-cli@6.24.1 ( Add depencies to project folder by launching within project folder)
+3. Build the object in package.json file above depencies to launch commands as scripts
+"scripts": {
+        "serve": "live-server public/",
+        "build": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
+    },
+4. Launch the scripts on terminal to use while inside of both directories with yarn run <scriptName>
+yarn run serve
+yarn run build
+now every time build is ran all the scripts get ran and are watched for updates
+
+To run webpack you must have a webpack.config.js file in the file you can take advantage of 
+import export modules. You must provide the import entry & output what files are being taken in & 
+when combining what file is the output path. 
+---------------------------------------------------------------------------------------------------
+Importing npm moduels
+Step1.Install:  yarn add validator@10.1.0 to project folder
+Step2.Import: import name from name || import name from './name'
+ - When using ./ it searches for relative files when using from name without ./ relative files
+  webpack will look for the same name in the node modules folder
+Step3.Use:  import validator from 'validator';
+ console.log(validator.isEmail('3fucks@yahoo.com'));
+ Search npm validator
+ -------------------------------------------------------
+ Adding npm react libraries
+ Search npm react
+ search npm react-dom 
+ Step1. Install: yarn add react@16.3.2 react-dom@16.3.2
+Step2. Import: import React from 'react';
+import ReactDOM from 'react-dom';
+Step3. Use: now you can use the react library and access react-dom but we do not have support for jsx
+ - To use babel with webpack we need to access a loader which lets you customize a file with webpack. It is a way a file gets transformed when webpack uses it.
+ - So we will use it with babel to convert es6 to es5 and jsx to javascript
+
+ babel-core allows you to run tools from webpack while babel-cli allows you to run tools from command line
+babel-loader is a babel plugin & allows us to teach webpack how to run babel when webpack sees certain files
+yarn add babel-core@6.26.3 babel-loader@7.1.4
+.........................................................................
+We can use webpack module.rules & rules allows you to setup how you want webpack to handle your loader through an array
+-----------------------------------------------
+Install webpack-dev-server locally with --
+  folder/ yarn add  webpack-dev-server@3.1.4
+Now we run the yarn script 
+  yarn run dev-server
+Type in localhost:8080 to visit webpage on browser
+Now it auto saves. 
+---------------------------------------------------------------------------------------
+Transform-class-properties allows us to not have to use the this object in the constructor to better refactor
+To intsall transform-class-properties
+  C:- yarn add babel-plugin-transform-class-properties
+---------------------------------------------------------------------------------------------
+In react there is a naming conflict with class for html & class in react so class within a div
+for html would be written as className="name" 
+---------------------------------------------------------------------------
+Install react-modal
+yarn add react-modal@2.2.2
+------------------------------------------------------------------------------
+ Dave Ceddia Mod Mr212 • a year ago
+Either way is fine. I like toggling the actual component because I can look at the DOM and see that it's not there. The css toggle leaves phantom elements on the page. But really, either way is fine.
+One thing to consider, though: when components enter and leave, their lifecycle methods are called (componentDidMount, etc). Hiding and showing with CSS will prevent these from being called. Neither is "better", but depending on your use case,
+you might prefer one of those behaviors over the other.
+An example: Say you load data in componentDidMount. You rely on that event to "refresh" the data every time the modal is opened.
+If it's being shown/hidden with CSS, componentDidMount will only be called the first time it opens. However, if the component is being removed from the DOM entirely, then componentDidMount will be called every time it opens.
+I should mention that this example doesn't apply to the Modal in this article, because it doesn't have any of this behavior :) Something to consider if you're writing your own though.
+---------------------------------------------------------------------------------------
+Install css addon Variables to add style with css to React
+yarn add style-loader@0.21 css-loader@0.28.11
+Installs style-loader & css-loader
+inside modules within webpack.config.js add:
+{
+            test: /\.css$/,
+            use: [
+                'style-loader',
+                'css-loader'
+            ]
+        }
+Every time it sees a file ending in .css, It will look to the css-loader, then 
+dump all the styles into the style-loader.
+---------------------------------------------------------------------------------
+How to install sass and use css with scss files
+sass-loader allows us to import sass files. Node-sass takes the sass code and converts it to regular css
+yarn add sass-loader@7.0.1 node-sass@4.9.0
+______________________________________________________________________________
+With css when naming file with an _ it is known as a partial because it contains part of the styles
+-----------------------------------------------------------------------------------
+Install css normalizer to render all styles a default way in all browsers
+yarn add normalize.css
+-------------------------------------------------------------------------------------
+Install react-router
+yarn add react-router-dom@4.2.2
+
+
+
+
+
+
+
+
+
+// instal Mobx preset
+ npm install --save-dev babel-preset-mobx
+// Via cli
+babel script.js --presets mobx
+//.bablerc
+{
+  "presets": ["mobx"]
+}
