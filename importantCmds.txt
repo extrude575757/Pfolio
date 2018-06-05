@@ -1,4 +1,4 @@
-Desktop\Web Design\Courses\Complete_React_Course\Section2\ExpensifyApp
+Desktop\Web Design\Courses\Complete_React_Course\Section2\Portfolio\Pfol\Pfolio
 // Type $r in console to view the global variable it is present for all components 
   if you are in the react developer tool console and click on a react componenet
   then switch to the console & type $r, you can view each components global variable that way to see all props & state.
