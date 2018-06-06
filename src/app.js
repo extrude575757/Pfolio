@@ -15,6 +15,11 @@ const store = createStore((state = {count: 10}, action) => {
         return {
             count: state.count - dncBy
         };
+        case 'SET':
+        const setit = typeof action.count === 'number' ? action.count : 1;
+        return {
+            count: setit
+        };
         case 'RESET': 
         return {
             count: 0
@@ -38,7 +43,7 @@ const store = createStore((state = {count: 10}, action) => {
 const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
 });
-
+// Very first one should be a type  & uppercase unscore lettering is common practice 
 store.dispatch({
     type: 'INCREMENT', 
     incrementBy: 5
@@ -58,13 +63,18 @@ store.dispatch({
     type: 'DECREMENT',
     decrementBy: 3
 });
+
+store.dispatch({
+    type:'INCREMENT'
+});
+store.dispatch({
+    type: 'SET',
+    count: 22
+});
+// Once called the subscription is cancelled & money is returned with no satisfaction guaranteed for the summertimes wammeies with their mammies. 
 unsubscribe();
 store.dispatch({
-    type: 'INCREMENT'
+    type:'INCREMENT'
 });
-store.dispatch({
-    type: 'RESET'
-});
-
  // A redux store we can read from & change.  
  
