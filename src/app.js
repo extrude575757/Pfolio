@@ -1,4 +1,5 @@
 import {createStore} from 'redux';
+
 // Action Generators - Functions that reutrn action objects
 const incrementCount = (payload={}) => ({
     type: 'INCREMENT',
@@ -11,10 +12,9 @@ const store = createStore((state = {count: 10}, action) => {
     console.log("running");
 
     switch(action.type){
-        case 'INCREMENT':
-        const incBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
+        case 'INCREMENT': 
         return {
-            count: state.count + incBy
+            count: state.count +action.incrementBy
         };
         case 'DECREMENT':
         const dncBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
@@ -49,26 +49,27 @@ const store = createStore((state = {count: 10}, action) => {
 const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
 });
-store.dispatch(incrementCount({incrementBy: 40}));
+store.dispatch(incrementCount({incrementBy: 1}));
+store.dispatch(incrementCount());
 // Very first one should be a type  & uppercase unscore lettering is common practice 
 store.dispatch({
     type: 'INCREMENT', 
-    incrementBy: 5
+    incrementBy: 1
 });
 store.dispatch({
     type: 'DECREMENT',
-    decrementBy: 3
+    decrementBy: 1
 });
 store.dispatch({
     type: 'RESET'
 })
 store.dispatch({
     type: 'INCREMENT',
-    incrementBy: 8
+    incrementBy: 1
 });
 store.dispatch({
     type: 'DECREMENT',
-    decrementBy: 3
+    decrementBy: 1
 });
 
 store.dispatch({
@@ -76,12 +77,18 @@ store.dispatch({
 });
 store.dispatch({
     type: 'SET',
-    count: 22
+    count: 10
 });
 // Once called the subscription is cancelled & money is returned with no satisfaction guaranteed for the summertimes wammeies with their mammies. 
 unsubscribe();
-store.dispatch({
-    type:'INCREMENT'
-});
- // A redux store we can read from & change.  
- 
+//==========================================================================
+ // We can manupilate data strings like this
+ const add = (data) => {
+    return data.a  + data.b
+};
+console.log("Data A"+ add({a:57,b:12}))  
+ // OR We can manupilate data strings like this
+ const add2 = ({a,b},c) => {
+    return a  + b *c
+};
+console.log("Data A"+ add2({a:557,b:512},100))   
