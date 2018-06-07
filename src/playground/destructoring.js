@@ -21,7 +21,7 @@ const {city,temp:temperature} = person.location;
 if(city && temperature){
     console.log(city,temperature);
 }
-/////////////////////////// Chanllenge Time niggers yo
+//Challenge
 const book = {
     title: 'Ego is the enemy',
     authory: 'Frank Simons',
@@ -32,3 +32,8 @@ const book = {
 
 const {name: publisherName = 'selfpublished'} = book.publisher;
 console.log("Challenge"+publisherName);
+// Array Destructuring
+// For object destructuring we use {} & for array destructuring we use []
+const address = ['15873 Chestnut rd.','Henries-Rollin','Georgia','93233-123'];
+// When we access it normally its like this
+console.log('Combining addresses'+address[3]+address[0]);
