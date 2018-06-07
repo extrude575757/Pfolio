@@ -37,3 +37,13 @@ console.log("Challenge"+publisherName);
 const address = ['15873 Chestnut rd.','Henries-Rollin','Georgia','93233-123'];
 // When we access it normally its like this
 console.log('Combining addresses'+address[3]+address[0]);
+// New fast es6 array destructuring used with [] instead of {} 
+const [street,arrayCity,state,zip] = address;
+console.log(street+zip);
+// If I only wanted to use the 3rd element in the array to access it we just place a , for each empty element in the array before that position
+const [,fuckinCity,,theZip]=address;
+console.log("the, skipped state array destructured statement"+fuckinCity+theZip );
+// We can do the same thing with default values
+const item = ['Coffee (hot)','$2.50','$3.00','$4.75'];
+const [coffee='fuck you',,,Large] = item;
+console.log("This is a "+coffee+"and it is "+Large);
