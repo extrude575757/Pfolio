@@ -6,6 +6,22 @@ const incrementCount = (payload={}) => ({
     incrementBy: typeof payload.incrementBy === 'number' ? payload.incrementBy : 1
 
 });
+// OR Without payload you can do this with incrementBy
+const incrementCount2 = (incrementBy) => ({
+    type: 'INCREMENT',
+    incrementBy: typeof incrementBy === 'number' ?incrementBy : 1
+
+});
+// OR Without payload you can do this with incrementBy
+const incrementCount3 = ({incrementBy = 1} = {}) => ({
+    type: 'INCREMENT',
+    incrementBy
+
+});
+const decrementCount = ({decrementBy = 1} = {}) => ({
+    type: 'DECREMENT',
+    decrementBy
+});
 // Whence creating the store first arg is value of state, 2nd arg is an Action (which is what we shall do with the state yonigger)
 const store = createStore((state = {count: 10}, action) => {
     // Console log running will get  call twice with store.dispatch. Once when the store is created
@@ -16,10 +32,9 @@ const store = createStore((state = {count: 10}, action) => {
         return {
             count: state.count +action.incrementBy
         };
-        case 'DECREMENT':
-        const dncBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
+        case 'DECREMENT': 
         return {
-            count: state.count - dncBy
+            count: state.count - action.decrementBy
         };
         case 'SET':
         const setit = typeof action.count === 'number' ? action.count : 1;
@@ -50,16 +65,15 @@ const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
 });
 store.dispatch(incrementCount({incrementBy: 1}));
-store.dispatch(incrementCount());
+store.dispatch(incrementCount2(133));
+store.dispatch(incrementCount3(33));
+store.dispatch(decrementCount());
 // Very first one should be a type  & uppercase unscore lettering is common practice 
 store.dispatch({
     type: 'INCREMENT', 
     incrementBy: 1
 });
-store.dispatch({
-    type: 'DECREMENT',
-    decrementBy: 1
-});
+
 store.dispatch({
     type: 'RESET'
 })
@@ -69,7 +83,7 @@ store.dispatch({
 });
 store.dispatch({
     type: 'DECREMENT',
-    decrementBy: 1
+    decrementBy: 11
 });
 
 store.dispatch({
