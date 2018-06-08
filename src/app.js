@@ -22,8 +22,15 @@ const decrementCount = ({decrementBy = 1} = {}) => ({
     type: 'DECREMENT',
     decrementBy
 });
+const setCount = ({count } ) => ({
+    type: 'SET',
+    count 
+});
+const setReset = () => ({
+    type: 'RESET'
+});
 // Whence creating the store first arg is value of state, 2nd arg is an Action (which is what we shall do with the state yonigger)
-const store = createStore((state = {count: 10}, action) => {
+const store  = createStore((state = {count: 1}, action) => {
     // Console log running will get  call twice with store.dispatch. Once when the store is created
     console.log("running");
 
@@ -36,17 +43,16 @@ const store = createStore((state = {count: 10}, action) => {
         return {
             count: state.count - action.decrementBy
         };
-        case 'SET':
-        const setit = typeof action.count === 'number' ? action.count : 1;
+        case 'SET': 
         return {
-            count: setit
+            count: action.count    
         };
         case 'RESET': 
         return {
             count: 0
         };
         default:
-        return state;
+        return state;////////////////
     }  
 }); 
 
@@ -64,35 +70,15 @@ const store = createStore((state = {count: 10}, action) => {
 const unsubscribe = store.subscribe(() => {
     console.log(store.getState());
 });
-store.dispatch(incrementCount({incrementBy: 1}));
-store.dispatch(incrementCount2(133));
-store.dispatch(incrementCount3(33));
-store.dispatch(decrementCount());
+//store.dispatch(incrementCount({incrementBy: 1}));
+//store.dispatch(incrementCount2(1));
+store.dispatch(incrementCount3({incrementBy: 52}));
+store.dispatch(decrementCount({decrementBy: 10}));
+store.dispatch(setCount({count: 2500}));
+//store.dispatch(setReset());
+
 // Very first one should be a type  & uppercase unscore lettering is common practice 
-store.dispatch({
-    type: 'INCREMENT', 
-    incrementBy: 1
-});
-
-store.dispatch({
-    type: 'RESET'
-})
-store.dispatch({
-    type: 'INCREMENT',
-    incrementBy: 1
-});
-store.dispatch({
-    type: 'DECREMENT',
-    decrementBy: 11
-});
-
-store.dispatch({
-    type:'INCREMENT'
-});
-store.dispatch({
-    type: 'SET',
-    count: 10
-});
+ 
 // Once called the subscription is cancelled & money is returned with no satisfaction guaranteed for the summertimes wammeies with their mammies. 
 unsubscribe();
 //==========================================================================
