@@ -1,5 +1,4 @@
 import {createStore,combineReducers} from 'redux';
-// We can create a normal combiend reducer type object like this
 const demoState = {
     expenses: [{
         id: 'klfjadlll',
@@ -11,18 +10,6 @@ const demoState = {
         startDate: undefined, endDate: undefined
     }
 };
-// Or we can do it cleaner like this
-const filtersReducerDefaultState = {
-    text: '',sortBy: 'date',
-        startDate: undefined, endDate: undefined
-};
-const filterReducer = (state =filtersReducerDefaultState, action) => {
-    switch(action.type){
-        
-        default: 
-        return state;
-    }
-};
 const expenseReducerDefaultState = [];
 const expenseReducer = (state = expenseReducerDefaultState, action) => {
     switch(action.type){
@@ -31,5 +18,5 @@ const expenseReducer = (state = expenseReducerDefaultState, action) => {
         
     }
 };
-const store = createStore(combineReducers({expenses:expenseReducer, filters:filterReducer}));
+const store = createStore(combineReducers({expenses:expenseReducer}));
 console.log(store.getState());
