@@ -126,7 +126,8 @@ yarn add redux@4.0.0
 install uuid for trick numbredge
 >yarn add uuid@3.2.1
 ===============================================================================================================
-
+install spread object operator for super usefull syntax that has not made its way to the main stream as the array spread operator has
+yarn add babel-plugin-transform-object-rest-spread@6.26.0
 
 
 

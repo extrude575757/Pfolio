@@ -1,6 +1,14 @@
 import {createStore,combineReducers} from 'redux'; 
 import {uuid} from 'uuid';
 const uuidv1 = require('uuid/v1');
+// Spread object operator is different than spread array operator, This is the spread object operator
+const user = {
+    name: 'Frank',
+    age: 34
+};
+// Here age is overridden with 9, if age was before ...user then age would be still 34 and not 9. It works the same
+// Way as array spread operator except it can be used with objects
+console.log({...user, age:9, location:'mammoth'});
 // We can create a normal combiend reducer type object like this
 const demoState = {
     expenses: [{
@@ -34,10 +42,21 @@ const filterReducer = (state =filtersReducerDefaultState, action) => {
 };
  
 // Destructure the object if it does not exist destructure an empty object
+/// Remove expense
 const removeExpense = ({id} = {}) => ({
     type: 'REMOVE_EXPENSE',
     id
 });
+// Edit Expense
+const editExpense = (id,updates) => ({
+    type: 'EDIT_EXPENSE', id, updates
+});
+// Set_text_filter
+// Sort_by_date
+// sort_by_amount
+// set_start_date
+// set_end_date
+
 const expenseReducerDefaultState = [];
 const expenseReducer = (state = expenseReducerDefaultState, action) => {
     switch(action.type){
@@ -68,3 +87,4 @@ const expense3  = store.dispatch(addExpense({description: 'Pussy',amount:100}));
 //console.log(store.getState());
 store.dispatch(removeExpense({id: expense2.expense.id}));
 store.dispatch(removeExpense({id: expense3.expense.id}));
+store.dispatch(editExpense(expense2.expense.id, {amount:1}));
